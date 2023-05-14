@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Book\BookController;
+use App\Http\Controllers\Author\AuthorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/login', [LoginController::class, 'getLogin'])->name('get.login');
+Route::post('/login', [LoginController::class, 'postLogin'])->name("post.login");
+
+// Authors
+Route::get('/authors', [AuthorController::class, 'index'])->name("get.authors");
+Route::get('/authors/{id}', [AuthorController::class, 'show'])->name("show.authors");
+
+// Books
+Route::get('/books', [BookController::class, 'index'])->name("get.books");
