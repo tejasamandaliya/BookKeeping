@@ -7,12 +7,12 @@ use Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
-use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\User\UserResource;
 use App\Services\SkeletonService;
+use Illuminate\Support\Facades\Session;
+
 
 class LoginController extends Controller
 {
@@ -34,8 +34,16 @@ class LoginController extends Controller
         if($response['status_code'] == 200){
             // Store the access token in the Laravel session
             session(['accessToken' => $response['data']['token_key']]);
+            session(['user_details'  => $response['data']['user']]);
             return redirect('authors');
         }
+    }
+
+    public function logout(Request $request){
+        Session::flush();
+        session()->flash('message', 'You have been logged out.');
+        return redirect('/login')->with('message', session('message'));
+
     }
 
     public static $loginValidationRules = [

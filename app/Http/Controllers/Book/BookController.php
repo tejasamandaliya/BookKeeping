@@ -28,12 +28,8 @@ class BookController extends Controller
         return view("books.list");
     }
 
-    public function postLogin(Request $request){
-
-        $response = $this->skeleton->getToken($request->all());
-        dd($response);
-
-        return view("auth.login");
+    public function removeBook(Request $request){
+        return view("books.list");
     }
 
     public static $loginValidationRules = [

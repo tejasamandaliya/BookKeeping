@@ -29,3 +29,6 @@ Route::get('/authors/{id}', [AuthorController::class, 'show'])->name("show.autho
 
 // Books
 Route::get('/books', [BookController::class, 'index'])->name("get.books");
+
+// Logout
+Route::get('/logout', [LoginController::class, 'logout'])->name("logout");

@@ -45,7 +45,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    Static
+                    @if(session('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                    @endif
+                    @if(session('user_details'))
+                        Active User : {{ session('user_details.first_name') }} {{ session('user_details.last_name') }}
+                        <div class="float-right">
+                            <a href="{{ route('logout') }}">Logout</a>
+                        </div>
+                    @endif
+
                 </div>
             </div>
         </div>
